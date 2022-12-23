@@ -1,31 +1,33 @@
 #!/usr/bin/python3
 #----------------------------------------------------------------------------
-# Created By   : Xioto
+# Created By   : Euan Steven
 # Created Date : September 2022
-# Version      : 1.3
+# Version      : 1.5
 # ---------------------------------------------------------------------------
 
 import time
-print("Importing Tensorflow...")
-import tensorflow 
-from tensorflow import keras
-print("Imported Tensorflow!")
+from gpiozero import MotionSensor
 import RPi.GPIO as GPIO
 from PIL import Image, ImageOps
 import numpy as np
 from picamera2 import Picamera2
 
+print("Importing Tensorflow...")
+import tensorflow 
+from tensorflow import keras
+print("Imported Tensorflow!")
+
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
 servoPIN = 17
-PIR_PIN = 7
-GPIO.setup(PIR_PIN, GPIO.IN)
 GPIO.setup(servoPIN, GPIO.OUT)
 p = GPIO.PWM(servoPIN, 50)
 
+sensor = MotionSensor(4)
+
 picam2 = Picamera2()
-camera_config = picam2.create_preview_configuration()
-picam2.configure(camera_config)
+preview_config = picam2.create_preview_configuration()
+picam2.configure(preview_config)
 picam2.start()
 
 def servo():
@@ -64,15 +66,23 @@ def process():
         print("Pigeon")
         servo()
 
-test = True
+def motion():
+    print("Motion Detected!")
+    picam2.capture_file("./image/motion.jpg")
+    process()
+    time.sleep(20)
+    print("Paused...")
 
-#GPIO.input(PIR_PIN)
+print("Detecting...")
 
-while True:
-    if test==True:
-        print("Detecting...")
-        print("Motion Detected!")
-        picam2.capture_file("./image/motion.jpg")
-        process()
-        time.sleep(20)
-        print("Paused...")
+try:
+    while True:
+      sensor.wait_for_motion()
+      motion()
+except KeyboardInterrupt:
+      print("")
+      print("Exiting...")
+      exit(0)
+
+
+
