@@ -2,10 +2,8 @@
 
 A Python Script that detects motion, takes picture using PiCamera, then runs Tensorflow inference
 
-<img src="https://github.com/EuanSteven/" alt="Put logo here" width="500"/>
-
-[![GitHub Status](https://img.shields.io/github/checks-status/EuanSteven/PiMotion)](https://github.com/EuanSteven/python-surf-forecast/)
-[![Github All Releases](https://img.shields.io/github/downloads/EuanSteven/PiMotion/total.svg?style=flat-square)](https://github.com/EuanSteven/python-surf-forecast/releases/latest)
+[![GitHub Status](https://img.shields.io/github/checks-status/EuanSteven/PiMotion)](https://github.com/EuanSteven/PiMotion/)
+[![Github All Releases](https://img.shields.io/github/downloads/EuanSteven/PiMotion/total.svg?style=flat-square)](https://github.com/EuanSteven/PiMotion/releases/latest)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 ![License](https://img.shields.io/github/license/EuanSteven/PiMotion)
 
